@@ -37,7 +37,7 @@ const getUsersPage = (req: Request, res: Response) => {
 const getUserById = (req: Request, res: Response) => {
   console.log(req.params);
   // TODO: Get user from DB
-  const user = users.find((user: {name: String, email: String}) => user.name === req.params.id);
+  const user = users.find((user: {name: string, email: string}) => user.name === req.params.id);
   if (user) {
     res.send(user);
   } else {
