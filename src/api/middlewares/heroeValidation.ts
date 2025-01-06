@@ -1,7 +1,7 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import Joi from 'joi';
 
-export const validate = <ReqParams, ReqBody, ReqQuery>(schema: Joi.ObjectSchema, reqType: 'body' | 'params' | 'query') => {
+export const validateHeroe = <ReqParams, ReqBody, ReqQuery>(schema: Joi.ObjectSchema, reqType: 'body' | 'params' | 'query') => {
 
   return (req: Request<ReqParams, never, ReqBody, ReqQuery>, res: Response, next: NextFunction) => {
     const reqToValidate: ReqParams | ReqBody | ReqQuery = req[reqType];
