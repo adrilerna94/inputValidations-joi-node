@@ -1,7 +1,7 @@
 export enum OriginPlanet {
-  Earth = 'Earth',
-  Mars = 'Mars',
-  Krypton = 'Krypton',
-  Venus = 'Venus',
-  Asgard = 'Asgard'
+  EARTH = 'Earth',
+  MARS = 'Mars',
+  KRYPTON = 'Krypton',
+  VENUS = 'Venus',
+  ASGARD = 'Asgard'
 }
