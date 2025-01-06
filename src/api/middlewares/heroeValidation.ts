@@ -6,9 +6,9 @@ export const validate = <ReqParams, ReqBody, ReqQuery>(schema: Joi.ObjectSchema,
   return (req: Request<ReqParams, never, ReqBody, ReqQuery>, res: Response, next: NextFunction) => {
     const reqToValidate: ReqParams | ReqBody | ReqQuery = req[reqType];
     if (!reqToValidate) {
-      return next(new Error("Req Type not supported.\n Must be 'body' | 'params' | 'query'"));
+      return next(new Error("Invalid request Type: Expected 'body', 'params', or 'query'. "));
     }
-    const validation = schema.validate(reqToValidate);
+    const validation = schema.validate(reqToValidate); //schema.validate(objToValidate)
     if (validation.error) {
       const errorMsn = validation.error.details.map(err=> ({
           field : err.path.join('.'), // convertimos ['path'] a 'path
