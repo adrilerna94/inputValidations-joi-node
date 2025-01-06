@@ -1,10 +1,10 @@
 import Joi from "joi";
 import { OriginPlanet } from "../Enums/originPlanetEnum";
-import { CostumeColor } from "../Enums/customeColorEnum";
+import { CostumColor } from "../Enums/customColorEnum";
 
 //Convertimos enum en un array de values
 const originPlanetValues = Object.values(OriginPlanet);
-const costumeColorValues = Object.values(CostumeColor);
+const costumeColorValues = Object.values(CostumColor);
 
 const heroeCreateSchema = Joi.object({
   alias: Joi.string().required().pattern(/^[a-zA-Z]{3,30}$/).optional(), // default optional() no necesario ponerlo

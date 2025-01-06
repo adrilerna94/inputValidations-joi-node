@@ -1,4 +1,4 @@
-export enum CostumeColor {
+export enum CostumColor {
   RED = 'red',
   BLUE = 'blue',
   BLACK = 'black',
