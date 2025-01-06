@@ -9,10 +9,11 @@ export interface Heroe {
   superpower: string,
   originPlanet: OriginPlanetEnum,
   debutYear?: number,
-  costumeColor?: CustomColorEnum,
+  customColor?: CustomColorEnum,
   archnemesis?: string,
   dateOfBirth: Date,
   lastSeen?: Date,
+  photo?: string,
   password: string,
   repeatPassword: string
 
