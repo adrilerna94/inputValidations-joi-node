@@ -29,7 +29,7 @@ const heroeCreateSchema = Joi.object({
 const heroeIdSchema = Joi.object({
   id: Joi.string()
       .messages({
-        'string.guid' : 'id must meet UUID standards',
+        'string.guid' : 'id must meet UUIDv4 standards',
         'any.required' : 'id is required'
       })
       .guid({ version: 'uuidv4'})
