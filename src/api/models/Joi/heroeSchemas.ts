@@ -13,11 +13,12 @@ const heroeCreateSchema = Joi.object({
   // EASY ➡️ originPlanet: Joi.string().valid('Earth', 'Mars', 'Krypton', 'Venus', 'Asgard').required(),
   originPlanet: Joi.valid(...originPlanetValues).required(),
   debutYear: Joi.number().min(1921).max(2024),
-  costumeColor: Joi.string().valid(...customColorValues).optional(),
+  customColor: Joi.string().valid(...customColorValues).optional(),
   //costumecolor: Joi.string().valid('red', 'blue', 'black'...)
   archnemesis: Joi.string().max(50),
   dateOfBirth: Joi.date().iso().less(`${new Date().getFullYear()-18}-01-06`).required(), // mayor de edad
   lastSeen: Joi.date().iso().greater('2020-01-01').optional(),
+  photo: Joi.string().uri().optional(),
   password: Joi.string().required().alphanum().min(8). max(30),
   //password: Joi.string().required().pattern(/^[a-zA-Z0-9]{8,30}$/)
   repeatPassword: Joi.any().valid(Joi.ref('password')).messages({ "any.only": "Password and RepeatPassword must match" }),
