@@ -4,5 +4,6 @@ export enum CustomColor {
   BLACK = 'black',
   YELLOW = 'yellow',
   PURPLE = 'purple',
-  GREEN = 'green'
+  GREEN = 'green',
+  BROWN = 'brown'
  }
