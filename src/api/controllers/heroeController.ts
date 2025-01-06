@@ -40,4 +40,25 @@ function createHeroe (req: Request, res: Response) {
 
 }
 
-export {getHeroes, getHeroeById, createHeroe};
+const updateHeroeById = (req: Request, res: Response) => {
+  const {id} = req.query; // utilizamos query string url/?id=
+
+  const index = heroes.findIndex((element) => element['id'] === id);
+  if (index === -1) {
+    return res.status(400).send({
+      msn: `Heroe with ID: ${id} NOT FOUND`
+    });
+  }
+  try {
+    heroes[index] = {id, ...req.body};
+    const identifier: string = req.body.alias || req.body.email;
+    return res.status(200).send({status: 'Success', [identifier]: heroes[index] });
+
+  } catch (error) {
+    return res.status(500).json(error.messages);
+  }
+
+
+}
+
+export {getHeroes, getHeroeById, createHeroe, updateHeroeById};
