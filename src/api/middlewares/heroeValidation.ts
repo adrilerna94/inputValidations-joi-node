@@ -8,16 +8,21 @@ export const validateHeroe = <ReqParams, ReqBody, ReqQuery>(schema: Joi.ObjectSc
     if (!reqToValidate) {
       return next(new Error("Invalid request Type: Expected 'body', 'params', or 'query'. "));
     }
-    const validation = schema.validate(reqToValidate); //schema.validate(objToValidate)
+    /*
+      *En Joi, de forma predeterminada, el proceso de validación se detiene en el primer error encontrado.
+      *Si deseas que Joi recoja todos los errores, debes pasar la opción abortEarly: false.
+    */
+    const validation = schema.validate(reqToValidate, {abortEarly: false}); //schema.validate(objToValidate)
     if (validation.error) {
       const errorMsn = validation.error.details.map(err=> ({
           field : err.path.join('.'), // convertimos ['path'] a 'path
           message: err.message, // mensaje error
           type: err.type // tipo validación que falló
       }));
-      res.status(400).send({errors: errorMsn});
+      return res.status(400).send({errors: errorMsn});
     }
     next();
   }
+
 }
 
