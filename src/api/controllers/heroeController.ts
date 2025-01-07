@@ -41,7 +41,7 @@ function createHeroe (req: Request, res: Response) {
 }
 
 const updateHeroeById = (req: Request, res: Response) => {
-  const {id} = req.query; // utilizamos query string url/?id=
+  const {id} = req.query; // utilizamos query string  ➡️ http://localhost:3000/api/v1/heroes?id=4f81bbdd-66b9-41bb-a9c9-0c81ca0b25f2
 
   const index = heroes.findIndex((element) => element['id'] === id);
   if (index === -1) {
@@ -58,7 +58,69 @@ const updateHeroeById = (req: Request, res: Response) => {
     return res.status(500).json(error.messages);
   }
 
+}
+
+const deleteHeroeById = (req: Request, res: Response) => {
+
+  const heroeIndex = heroes.findIndex((x) => x.id == req.params.id);
+
+  if (heroeIndex === -1) return res.status(404).json({error: `Heroe with ID ${req.params.id} NOT FOUND`});
+
+  try{
+
+    // Filtra los héroes que NO coinciden con el id proporcionado.
+    const filteredArrayHeroes = heroes.filter((heroe) => heroe.id !== req.params.id);
+
+    // vacía array original ➡️ no podemos reasignar por el uso de const en heroes data
+    heroes.length = 0;
+
+    // Agrega los elementos filtrados de vuelta al array original
+    heroes.push(...filteredArrayHeroes);
+
+    return res.status(204).end();  // necesitas send() || end()
+
+  } catch (e) {
+
+    return res.status(500).json({
+      status: 'Fail',
+      msn: `Heroe with ID ${req.params.id} couldn't be deleted`,
+      errors: e.messages
+    });
+  }
 
 }
 
-export {getHeroes, getHeroeById, createHeroe, updateHeroeById};
+
+
+export { getHeroes, getHeroeById, createHeroe, updateHeroeById, deleteHeroeById };
+
+
+/*
+    // codigo 204 (No content) ➡️ no devuelve contenido en la respuesta. por eso usaremos 200
+    //const [heroe] = heroes.splice(heroeIndex, 1);
+    return res.status(204).send({
+      status: 'Success',
+      msn: `Heroe with ID ${req.params.id} deleted Successfully`,
+      heroeDeleted: heroe
+    });
+*/
+
+
+/* ELIMINACIÓN MÁS OPTIMA CON ➡️ SPLICE
+  heroes.splice(heroeIndex, 1);
+*/
+
+/* ELIMINACIÓN CON SLICE ➡️
+// Usamos slice para obtener un nuevo array sin el héroe con ese índice
+if (heroIndex !== -1) {
+  // Reemplazamos el array original con el nuevo array modificado
+  heroes = [
+    ...heroes.slice(0, heroIndex),  // Elementos antes del héroe
+    ...heroes.slice(heroIndex + 1)  // Elementos después del héroe
+  ];
+  🧠 Cuando usarlo
+  Si prefieres no modificar el array original y obtener un nuevo array sin el elemento,
+   puedes usar slice() y asignar el resultado a la misma variable heroes.
+
+*/
+
