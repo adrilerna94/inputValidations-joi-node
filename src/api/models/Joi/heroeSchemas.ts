@@ -1,10 +1,10 @@
 import Joi from "joi";
 import { OriginPlanet } from "../Enums/originPlanetEnum";
-import { CustomColor } from "../Enums/customColorEnum";
+import { CostumeColor } from "../Enums/costumeColorEnum";
 
 //Convertimos enum en un array de values
 const originPlanetValues = Object.values(OriginPlanet);
-const customColorValues = Object.values(CustomColor);
+const costumeColorValues = Object.values(CostumeColor);
 
 const heroeCreateSchema = Joi.object({
   alias: Joi.string().pattern(/^[a-zA-Z]{3,30}$/).optional(), // default optional() no necesario ponerlo
@@ -13,7 +13,7 @@ const heroeCreateSchema = Joi.object({
   // EASY ➡️ originPlanet: Joi.string().valid('Earth', 'Mars', 'Krypton', 'Venus', 'Asgard').required(),
   originPlanet: Joi.valid(...originPlanetValues).required(),
   debutYear: Joi.number().min(1921).max(2024),
-  customColor: Joi.string().valid(...customColorValues).optional(),
+  costumeColor: Joi.string().valid(...costumeColorValues).optional(),
   //costumecolor: Joi.string().valid('red', 'blue', 'black'...)
   archnemesis: Joi.string().max(50),
   dateOfBirth: Joi.date().iso().less(`${new Date().getFullYear()-18}-01-06`).required(), // mayor de edad
