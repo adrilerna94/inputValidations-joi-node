@@ -1,5 +1,5 @@
 import { OriginPlanet as OriginPlanetEnum} from "../models/Enums/originPlanetEnum";
-import { CustomColor as CustomColorEnum} from "../models/Enums/customColorEnum";
+import { CostumeColor as CostumeColorEnum} from "../models/Enums/costumeColorEnum";
 
 export interface Heroe {
   // property? ➡️ OPCIONAL
@@ -9,7 +9,7 @@ export interface Heroe {
   superpower: string,
   originPlanet: OriginPlanetEnum,
   debutYear?: number,
-  customColor?: CustomColorEnum,
+  costumeColor?: CostumeColorEnum,
   archnemesis?: string,
   dateOfBirth: Date,
   lastSeen?: Date,
